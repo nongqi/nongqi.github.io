@@ -11,5 +11,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.28.0",
+    "eslint-config-sprite": "^1.0.6",
+    "eslint-plugin-html": "^6.0.0"
+  }
 }
