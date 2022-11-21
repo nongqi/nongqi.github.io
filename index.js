@@ -1,19 +1,32 @@
 /*
  * @Author: nongqi
  * @Date: 2022-11-19 01:11:02
- * @LastEditTime: 2022-11-19 15:59:25
+ * @LastEditTime: 2022-11-22 00:49:29
  * @LastEditors: nongqi
  * @Description: 
  */
 import { readFileSync } from 'fs'
 import { dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { generate } from './lib/generator.js';
+import { createRandomPicker } from './lib/random.js';
 
-const url = import.meta.url; // 获取当前脚本文件的url
-const filepath = resolve(dirname(fileURLToPath(url)), 'corpus/data.json')
-const data = readFileSync(filepath, { encoding: 'utf-8' });
-const corpus = JSON.parse(data)
 
-console.log('====================================');
-console.log(corpus);
-console.log('====================================');
+// 获取当前脚本文件所在目录
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+function loadCorpus(src) {
+  const filepath = resolve(__dirname, src);
+  const data = readFileSync(filepath, { encoding: 'utf-8' });
+  return JSON.parse(data)
+
+}
+
+const corpus = loadCorpus('corpus/data.json')
+const pickTitle = createRandomPicker(corpus.title)
+const title = pickTitle()
+
+const article = generate(title, { corpus })
+
+console.log(`${title}\n\n    ${article.join('\n    ')}`);
+
