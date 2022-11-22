@@ -18,6 +18,7 @@
     "eslint-plugin-html": "^6.0.0"
   },
   "dependencies": {
+    "command-line-args": "^5.2.1",
     "dayjs": "^1.11.6"
   }
 }

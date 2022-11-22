@@ -1,7 +1,7 @@
 /*
  * @Author: nongqi
  * @Date: 2022-11-19 01:11:02
- * @LastEditTime: 2022-11-22 05:50:20
+ * @LastEditTime: 2022-11-22 10:27:41
  * @LastEditors: nongqi
  * @Description: index
  */
@@ -37,10 +37,30 @@ function saveCorpus(title, article) {
   return outputFile;
 }
 
+function parseOptions(options = {}) {
+  const argv = process.argv;
+
+  for (let i = 2; i < argv.length; i++) {
+    const cmd = argv[i - 1];
+    const value = argv[i];
+    if (cmd === '--title') {
+      options.title = value;
+    } else if (cmd === '--min') {
+      options.min = Number(value);
+    } else if (cmd === '--max') {
+      options.max = Number(value);
+    }
+  }
+
+  return options;
+}
+
 const corpus = loadCorpus('corpus/data.json');
-const pickTitle = createRandomPicker(corpus.title);
-const title = pickTitle();
+const options = parseOptions();
+const title = options.title || createRandomPicker(corpus.title)();
 
-const article = generate(title, { corpus });
+const article = generate(title, { corpus, ...options });
 
-saveCorpus(title, article);
+const output = saveCorpus(title, article);
+
+console.log(`生成成功！文章保存于：${output}`);
