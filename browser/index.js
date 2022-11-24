@@ -1,7 +1,7 @@
 /*
  * @Author: nongqi
  * @Date: 2022-11-25 02:03:36
- * @LastEditTime: 2022-11-25 02:03:45
+ * @LastEditTime: 2022-11-25 02:31:09
  * @LastEditors: nongqi
  * @Description: 
  */
@@ -18,4 +18,4 @@ async function loadCorpus(corpuspath) {
   return defaultCorpus;
 }
 
-export { generate, createRandomPicker, loadCorpus };
+window.bullshitGenerator = { generate, createRandomPicker, loadCorpus };

@@ -1,7 +1,7 @@
 <!--
  * @Author: nongqi
  * @Date: 2022-11-23 22:39:26
- * @LastEditTime: 2022-11-25 01:51:03
+ * @LastEditTime: 2022-11-25 02:27:33
  * @LastEditors: nongqi
  * @Description: 
 -->
@@ -114,13 +114,20 @@
     <article></article>
   </main>
   <footer>改进版：<a href="https://github.com/akira-cn/bullshit-generator-js">bullshit-generator-js</a> 作者：月影</footer>
+  <script src="https://akira-cn.github.io/bullshit-generator-js/dist/index.js"></script>
   <script type="module">
-    import {
-      generate
-    } from './lib/generator.js';
-    import {
-      createRandomPicker
-    } from './lib/random.js'
+    // import {
+    //   generate
+    // } from './lib/generator.js';
+    // import {
+    //   createRandomPicker
+    // } from './lib/random.js'
+
+    const {
+      generate,
+      createRandomPicker,
+      loadCorpus
+    } = bullshitGenerator;
 
     const options = document.querySelector('.options');
     const config = {
@@ -146,13 +153,16 @@
       const pickTitle = createRandomPicker(corpus.title);
       titleEl.value = pickTitle();
       generateButton.addEventListener('click', () => {
-        const text = generate(titleEl.value, { corpus, ...config})
+        const text = generate(titleEl.value, {
+          corpus,
+          ...config
+        })
         article.innerHTML = `<section>${text.join('</section><section>')}</section>`;
       });
 
       anotherTitleButton.addEventListener('click', () => {
         titleEl.value = pickTitle();
-        if(article.innerHTML) generateButton.click();
+        if (article.innerHTML) generateButton.click();
       });
     }())
   </script>
