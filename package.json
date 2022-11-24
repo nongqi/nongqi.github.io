@@ -8,14 +8,17 @@
     "lib": "lib"
   },
   "scripts": {
+    "start": "http-server -c-1 -p3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "esbuild": "^0.15.15",
     "eslint": "^8.28.0",
     "eslint-config-sprite": "^1.0.6",
-    "eslint-plugin-html": "^6.0.0"
+    "eslint-plugin-html": "^6.0.0",
+    "http-server": "^14.1.1"
   },
   "dependencies": {
     "command-line-args": "^5.2.1",
